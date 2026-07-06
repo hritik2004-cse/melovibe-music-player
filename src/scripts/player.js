@@ -21,6 +21,14 @@ export const initializePlayer = () => {
     });
   });
 
+  playerState.audio.addEventListener("loadstart", () => console.log("loadstart"));
+
+  playerState.audio.addEventListener("waiting", () => console.log("waiting"));
+
+  playerState.audio.addEventListener("canplay", () => console.log("canplay"));
+
+  playerState.audio.addEventListener("playing", () => console.log("playing"));
+
   // the loadedmetadata update both times when the metadata is loaded like total time, volume etc
   playerState.audio.addEventListener("loadedmetadata", () => {
     updatePlayerUi(playerState.currentSong, playerState.audio.duration);
@@ -41,10 +49,10 @@ export const initializePlayer = () => {
   // this event listner change the song to next when previous song ended
   playerState.audio.addEventListener("ended", () => {
     const nextIndex = playerState.currentIndex + 1;
-    if (nextIndex > playlistData.length - 1){
+    if (nextIndex > playlistData.length - 1) {
       playerState.isPlaying = false;
       return;
-    } 
+    }
     playSong(nextIndex);
   });
 
@@ -76,7 +84,6 @@ export const initializePlayer = () => {
       }
     });
   };
-
 
   // updates previous/next buttons
 
